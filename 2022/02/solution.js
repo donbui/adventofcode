@@ -8,10 +8,10 @@ const totalScoreOne = fs
   .replace(/C|Z/gi, "3")
   .trim()
   .split("\n")
-  .map((round) => {
-    [oppHand, myHand] = round.split(" ").map((x) => parseInt(x, 10));
-
+  .map(line => line.split(" ").map((x) => parseInt(x, 10)))
+  .map(([oppHand, myHand]) => {
     let result = 0;
+
     if (oppHand === myHand) {
       result += 3;
     } else if (myHand - oppHand === 1 || myHand - oppHand === -2) {
@@ -35,10 +35,10 @@ const totalScoreTwo = fs
   .replace(/Z/gi, "6")
   .trim()
   .split("\n")
-  .map((round) => {
-    [oppHand, result] = round.split(" ").map((x) => parseInt(x, 10));
-
+  .map(line => line.split(" ").map((x) => parseInt(x, 10)))
+  .map(([oppHand, result]) => {
     let myHand;
+
     if (result === 0) {
       myHand = oppHand === 1 ? 3 : oppHand - 1;
     } else if (result === 3) {
